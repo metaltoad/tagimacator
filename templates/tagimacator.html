@@ -1,0 +1,11 @@
+<div class="tagimacator {{(tagimacated.length)? 'tagimacating' : ''}}">
+  <div class="tagimacator-top">
+    <ul class="tagimacator-selected-list" ng-show="tagimacated.length">
+      <li ng-repeat="tag in tagimacated">{{tag[filter]}} <span class="tagimacant" ng-click="tagimacant(tag)">X</span></li>
+    </ul>
+    <input type="text" class="tagimacator-input" ng-model="tagimacator.text" ng-focus="isTagimacating = true" ng-change="tagimacate()">
+  </div>
+  <ul class="tagimacator-search-list" ng-show="isTagimacating">
+    <li ng-repeat="result in filterResults" ng-class="(result.tagimacateSelected)? 'selected' : ''" ng-click="tagimacan($event, result)">{{result[filter]}}</li>
+  </ul>  
+</div>
