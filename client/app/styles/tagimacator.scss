@@ -1,0 +1,66 @@
+.tagimacator {
+  width: 100%;
+  overflow-x: hidden;
+  padding:2px;
+  margin-bottom: 20px;
+  &.tagimacating {
+    .tagimacator-top {
+      border-top:1px solid #ccc;
+    }
+  }
+  .tagimacator-top {
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    width:100%;
+    background-color: #fff;
+    .tagimacator-input {
+      width: 100%;
+      max-width: 100%;
+      border-top:1px solid #ccc;
+      border-bottom:none;
+      border-left:none;
+      border-right:none;
+      outline: none;
+    }
+  }
+
+  .tagimacator-search-list {
+    width:100%;
+    margin:0;
+    padding:0;
+    background-color: #fff;
+    overflow-y: auto;
+    max-height: 200px;
+    li {
+      padding-left: 4px;
+      cursor: pointer;
+      &.selected {
+        background-color: #ccc;
+      }
+    }
+  }
+
+  .tagimacator-selected-list {
+    display: inline-block;
+    width:auto;
+    margin:0;
+    padding:0;
+    text-align: left;
+    li {
+      width: auto;
+      background-color: #ccc;
+      margin-left: 2px;
+      padding-left: 2px;
+      padding-right: 2px;
+      line-height: 12px;
+      border-radius: 6px;
+      display: inline-block;
+      text-align: left;
+    }
+  }
+
+  .tagimacant {
+    cursor: pointer;
+  }
+}

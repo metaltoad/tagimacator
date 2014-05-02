@@ -1,0 +1,136 @@
+<div id="docs"><h2>Documentation!</h2><hr><h3>Properties:</h3><hr><div class="doc-wrapper"><ul><!-- prop 1 --><li><div class="documentation"><h4>tagimacator-data</h4><p>Desc: Attribute that resolves to a model on the scope hierarchy to populate tag data.</p><p>Required: true.</p><p>Misc: It is important to note that:</p><ul><li>Only arrays of objects are currently supported</li><li>If the attribute resolves to a function it must return a promise.</li><li>See: <a href="#/demos#2">here</a> for more info.</li></ul><br><ul class="nav nav-pills pull-left"><li class="{{(docs.tagimacator_data === 'html')? 'active': ''}}" ng-click="docs.tagimacator_data = 'html'"><a>HTML</a></li><li class="{{(docs.tagimacator_data === 'js')? 'active': ''}}" ng-click="docs.tagimacator_data = 'js'"><a>JS</a></li></ul><br><pre ng-show="docs.tagimacator_data == 'html'">
+            <code>
+<span>&lt;</span>div tagimacator tagimacator-data="getUsers"<span>&gt;</span><span>&lt;</span>div<span>&gt;</span>
+            </code>
+          </pre><pre ng-show="docs.tagimacator_data == 'js'">
+            <code>
+$scope.getUsers = function() {
+  var def = $q.defer();
+
+  $http({method:'GET', url:'http://myserver.com/users'}).success(function(users) {
+    def.resolve(users);
+  });
+
+  return def.promise;
+};
+            </code>
+          </pre></div></li><hr><!-- Prop 2 --><li><div class="documentation"><h4>tagimacator-save-to</h4><p>Desc: Attribute that resolves to a model on the scope hierarchy to save selected tag models to.</p><p>Required: true.</p><p>Misc: It is important to note that:</p><ul><li>Must be an array.</li><li>See: <a href="#/demos#2">here</a> for more info.</li></ul><br><ul class="nav nav-pills pull-left"><li class="{{(docs.tagimacator_save_to === 'html')? 'active': ''}}" ng-click="docs.tagimacator_save_to = 'html'"><a>HTML</a></li><li class="{{(docs.tagimacator_save_to === 'js')? 'active': ''}}" ng-click="docs.tagimacator_save_to = 'js'"><a>JS</a></li></ul><br><pre ng-show="docs.tagimacator_save_to == 'html'">
+            <code>
+<span>&lt;</span>div tagimacator tagimacator-data="getUsers" tagimacator-save-to="usersSave"<span>&gt;</span><span>&lt;</span>div<span>&gt;</span>
+            </code>
+          </pre><pre ng-show="docs.tagimacator_save_to == 'js'">
+            <code>
+$scope.usersSave = [];
+
+$scope.getUsers = function() {
+  var def = $q.defer();
+
+  $http({method:'GET', url:'http://myserver.com/users'}).success(function(users) {
+    def.resolve(users);
+  });
+
+  return def.promise;
+};
+            </code>
+          </pre></div></li><hr><!-- Prop 3 --><li><div class="documentation"><h4>tagimacator-filter-by</h4><p>Desc: Attribute that refers to a key name within the objects of the tagimacator-data array that is provided. The filter-by and save-by attributes are strongly related however only filter-by is required. Filter-by concerns how the data set will be queried when typing into the tagimacator. Save-by concerns how the data will be saved when a tag is selected.</p><p>Required: true.</p><br><ul class="nav nav-pills pull-left"><li class="{{(docs.tagimacator_filter_by === 'html')? 'active': ''}}" ng-click="docs.tagimacator_filter_by = 'html'"><a>HTML</a></li><li class="{{(docs.tagimacator_filter_by === 'js')? 'active': ''}}" ng-click="docs.tagimacator_filter_by = 'js'"><a>JS</a></li><li class="{{(docs.tagimacator_filter_by === 'data')? 'active': ''}}" ng-click="docs.tagimacator_filter_by = 'data'"><a>DATA</a></li></ul><br><pre ng-show="docs.tagimacator_filter_by == 'html'">
+            <code>
+<span>&lt;</span>div tagimacator tagimacator-data="getUsers" tagimacator-save-to="usersSave" tagimacator-filter-by="name"<span>&gt;</span><span>&lt;</span>div<span>&gt;</span>
+            </code>
+          </pre><pre ng-show="docs.tagimacator_filter_by == 'js'">
+            <code>
+$scope.usersSave = [];
+
+$scope.getUsers = function() {
+  var def = $q.defer();
+
+  $http({method:'GET', url:'http://myserver.com/users'}).success(function(users) {
+    def.resolve(users);
+  });
+
+  return def.promise;
+};
+            </code>
+          </pre><pre ng-show="docs.tagimacator_filter_by == 'data'">
+            <code>
+// Data example
+// Filtering by name
+{
+  age: 42,
+  name: "Hank",
+  _id: "5362f9d895f21a8c0e3d35cf"
+} 
+            </code>
+          </pre></div></li><hr><!-- Prop 4 --><li><div class="documentation"><h4>tagimacator-save-by</h4><p>Desc: Attribute that refers to a key name within the objects of the tagimacator-data array that is provided. It is used to save selected tags to the "tagimacator-save-to" model. If not provided it will use the "tagimacator-filter-by" attribute. The reason for the distinction is to prevent duplicates from being selected and saved. The example here has many duplicate "name" fields, but each object has a unique "_id". Thus each "Hank" actually refers to a seperate person.</p><p>Required: false.</p><br><ul class="nav nav-pills pull-left"><li class="{{(docs.tagimacator_save_by === 'html')? 'active': ''}}" ng-click="docs.tagimacator_save_by = 'html'"><a>HTML</a></li><li class="{{(docs.tagimacator_save_by === 'js')? 'active': ''}}" ng-click="docs.tagimacator_save_by = 'js'"><a>JS</a></li><li class="{{(docs.tagimacator_save_by === 'data')? 'active': ''}}" ng-click="docs.tagimacator_save_by = 'data'"><a>DATA</a></li></ul><br><pre ng-show="docs.tagimacator_save_by == 'html'">
+            <code>
+<span>&lt;</span>div tagimacator tagimacator-data="getUsers" tagimacator-save-to="usersSave" tagimacator-filter-by="name" tagimacator-save-by="_id"<span>&gt;</span><span>&lt;</span>div<span>&gt;</span>
+            </code>
+          </pre><pre ng-show="docs.tagimacator_save_by == 'js'">
+            <code>
+$scope.usersSave = [];
+
+$scope.getUsers = function() {
+  var def = $q.defer();
+
+  $http({method:'GET', url:'http://myserver.com/users'}).success(function(users) {
+    def.resolve(users);
+  });
+
+  return def.promise;
+};
+            </code>
+          </pre><pre ng-show="docs.tagimacator_save_by == 'data'">
+            <code>
+// Data example
+// Filtering by name
+// Saving by _id
+{
+  age: 42,
+  name: "Hank",
+  _id: "5362f9d895f21a8c0e3d35cf"
+} 
+            </code>
+          </pre></div></li></ul></div><hr><h3>Methods</h3><hr><div class="doc-wrapper"><ul><!-- Method 1 --><li><div class="documentation"><h4>tagimacator-on-tag-select</h4><p>Desc: Attribute that resolves to a function on scope that is used as a callback when a tag is selected.</p><p>Arguments: The only thing passed to the on-tag-select callback is the item model of the tag that was clicked.</p><p>Required: false.</p><br><ul class="nav nav-pills pull-left"><li class="{{(docs.tagimacator_on_tag_select === 'html')? 'active': ''}}" ng-click="docs.tagimacator_on_tag_select = 'html'"><a>HTML</a></li><li class="{{(docs.tagimacator_on_tag_select === 'js')? 'active': ''}}" ng-click="docs.tagimacator_on_tag_select = 'js'"><a>JS</a></li></ul><br><pre ng-show="docs.tagimacator_on_tag_select == 'html'">
+            <code>
+<span>&lt;</span>div tagimacator tagimacator-data="getUsers" tagimacator-save-to="usersSave" tagimacator-filter-by="name" tagimacator-save-by="_id" tagimacator-on-tag-select="onselect"<span>&gt;</span><span>&lt;</span>div<span>&gt;</span>
+            </code>
+          </pre><pre ng-show="docs.tagimacator_on_tag_select == 'js'">
+            <code>
+$scope.usersSave = [];
+
+$scope.getUsers = function() {
+  var def = $q.defer();
+
+  $http({method:'GET', url:'http://myserver.com/users'}).success(function(users) {
+    def.resolve(users);
+  });
+
+  return def.promise;
+};
+
+$scope.onselect = function(itm) {
+  console.log(itm);
+};
+            </code>
+          </pre></div></li><hr><li><div class="documentation"><h4>tagimacator-on-tag-deselect</h4><p>Desc: Attribute that resolves to a function on scope that is used as a callback when a tag is deselected.</p><p>Arguments: The only thing passed to the on-tag-select callback is the item model of the tag that was clicked.</p><p>Required: false.</p><br><ul class="nav nav-pills pull-left"><li class="{{(docs.tagimacator_on_tag_deselect === 'html')? 'active': ''}}" ng-click="docs.tagimacator_on_tag_deselect = 'html'"><a>HTML</a></li><li class="{{(docs.tagimacator_on_tag_deselect === 'js')? 'active': ''}}" ng-click="docs.tagimacator_on_tag_deselect = 'js'"><a>JS</a></li></ul><br><pre ng-show="docs.tagimacator_on_tag_deselect == 'html'">
+            <code>
+<span>&lt;</span>div tagimacator tagimacator-data="getUsers" tagimacator-save-to="usersSave" tagimacator-filter-by="name" tagimacator-save-by="_id" tagimacator-on-tag-deselect="ondeselect"<span>&gt;</span><span>&lt;</span>div<span>&gt;</span>
+            </code>
+          </pre><pre ng-show="docs.tagimacator_on_tag_deselect == 'js'">
+            <code>
+$scope.usersSave = [];
+
+$scope.getUsers = function() {
+  var def = $q.defer();
+
+  $http({method:'GET', url:'http://myserver.com/users'}).success(function(users) {
+    def.resolve(users);
+  });
+
+  return def.promise;
+};
+
+$scope.ondeselect = function(itm) {
+  console.log(itm);
+};
+            </code>
+          </pre></div></li></ul></div></div>
